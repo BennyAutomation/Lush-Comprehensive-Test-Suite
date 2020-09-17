@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import test.java.pages.CartPage;
 import test.java.pages.ProductDetailsPage;
+import test.java.pages.ReviewPage;
 import test.java.pages.SearchResultsPage;
 import test.java.pages.WishlistPage;
 
@@ -29,20 +30,21 @@ public class ProductDetailsTests extends BaseTest {
 		Assert.assertFalse(cp.isCartEmpty(), "[[[Product was not added to Cart!]]]");
 	}
 	
-	// WIP
-	@Test(enabled = false)
+	@Test
 	public void isUserRedirectedToReviewForm() {
 		openPage(SRP_URL);
 		SearchResultsPage srp = new SearchResultsPage(driver);
 		ProductDetailsPage pdp = srp.followFirstResult();
+		ReviewPage rp = pdp.writeReview();
+		Assert.assertTrue(rp.canLeaveReview(), "[[[User was not redirected to review form!]]]");
 	}
 	
-	// WIP
-	@Test(enabled = false)
+	@Test
 	public void doGalleryArrowsChangePicture() {
 		openPage(SRP_URL);
 		SearchResultsPage srp = new SearchResultsPage(driver);
 		ProductDetailsPage pdp = srp.followFirstResult();
+		Assert.assertTrue(pdp.canNavigateGallery(), "[[[Gallery arrows do not change image!]]]");
 	}
 	
 
